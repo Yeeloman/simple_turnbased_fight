@@ -80,17 +80,22 @@ npc_infos = {
     "character name" : "",
 }
 npc_states = {
-    "r_hp" : random.randint(1, 15),
-    "r_atk" : random.randint(1, 15),
-    "r_def" : random.randint(1, 15)
+    "HP" : 0,
+    "Atk" : 0,
+    "Def" : 0
 }
 classes = ["Warrior", "Knight"]
 #NPC character creator
 def npcMaker():
-    r_states = 50
+    r_states = 15
     npc_infos["character class"] = random.choice(classes)
     npc_infos["character name"] = random.choice(npc_name)
-    r_states -= (npc_states["r_hp"] + npc_states["r_atk"] + npc_states["r_def"])
+    for char_stats in classes_stats:
+        if char_stats["character class"] == npc_infos["character class"]:
+            npc_states["HP"] = char_stats["HP"]
+            npc_states["Atk"] = char_stats["Atk"]
+            npc_states["Def"] = char_stats["Def"]
+            break
 
     while r_states > 0:
         random_attribute = random.choice(list(npc_states.keys()))

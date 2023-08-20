@@ -3,6 +3,7 @@
 from classes import character_class
 from loops import addToClass, character_selection, character_stats, addToClass, npcMaker
 import random
+from battle import battle
 
 classes = ["Warrior", "Knight"]
 chara_info = {
@@ -33,4 +34,10 @@ print("You are up against {} the {}".format(npc_player["character name"], npc_pl
 Player1 = character_class(main_player)
 Player2 = character_class(npc_player)
 print("----------------------------------------------")
+players_list = [Player1, Player2]
+current_player = random.choice(players_list)
 
+print("{} play's first".format(current_player.chara_info["character name"]))
+
+fight = battle()
+fight.startBattle(current_player, Player1, Player2)
