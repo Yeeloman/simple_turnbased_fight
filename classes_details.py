@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+from classes import Warrior, Knight, character_class
+
 classes = [
     ["Warrior", 11, 15, 9],
     ["Knight", 13, 7, 15]
@@ -17,3 +19,11 @@ def classes_details_printer(selected_class):
 
 
 
+def callClass(player):
+    if player["character class"] == "Warrior":
+        player_ = Warrior(player)
+    elif player["character class"] == "Knight":
+        player_ = Knight(player)
+    else:
+        player_ = character_class(player)
+    return player_

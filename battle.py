@@ -26,29 +26,36 @@ class battle:
     def player_turn( player, npc):
         while True:
             print("{}'s turn:".format(player.chara_info["character name"]))
-            print("HP : {}".format(player.chara_info["HP"]))
+            print("HP : {}/{}".format(player.chara_info["HP"], player.chara_info["Max HP"]))
             action = input(">>>Choose an action (attack/heal): ").lower()
 
             if action == "attack":
                 damage = player.damage_cal(player, npc)
                 npc.take_damage(damage)
+                print("----------------------------------------------")
                 print("{} dealt {} to {}".format(player.chara_info["character name"], npc.chara_info["character name"], damage))
+                print("----------------------------------------------")
                 break
 
             elif action == "heal":
                 heal_amt = player.heal()
+                if heal_amt == -1:
+                    continue
+                print("----------------------------------------------")
                 print("{} healed {}".format(player.chara_info["character name"], heal_amt))
+                print("----------------------------------------------")
                 break
 
             else:
                 print("action unknown")
+        print("----------------------------------------------")
 
     @staticmethod
     def npc_turn(player, npc):
         print("{}'s turn:".format(npc.chara_info["character name"]))
-        print("HP : {}".format(npc.chara_info["HP"]))
+        print("HP : {}/{}".format(npc.chara_info["HP"], npc.chara_info["Max HP"]))
         actions = ["attack", "heal"]
-        if npc.chara_info["HP"] <= 10:
+        if npc.chara_info["HP"] <= npc.chara_info["Max HP"] // 2 + random.randint(1, 3):
             action = random.choice(actions)
         else:
             action = "attack"
